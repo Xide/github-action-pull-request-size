@@ -13,17 +13,25 @@ This Action adds size labels on a pull request based on number of additions and 
 
 Example workflow:
 
-```hcl
-workflow "Pull Request Size" {
-  on = "pull_request"
-  resolves = ["pull-request-size"]
-}
+```yaml
+name: LabelPRSize
 
-action "pull-request-size" {
-  uses = "innovationnorway/github-action-pull-request-size@master"
-  secrets = ["GITHUB_TOKEN"]
+on: [pull_request]
+
+jobs:
+  label-pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker://sigbilly/github-action-pull-request-size:latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 }
 ```
+
+## Acknowledgments
+
+Forked from [@innovationnorway](https://github.com/innovationnorway) [`github-action-pull-request-size` repository](https://github.com/innovationnorway/github-action-pull-request-size), which is now archived.
+
 
 ## License
 

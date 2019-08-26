@@ -16,3 +16,14 @@ jobs:
       run: docker login -u sigbilly -p ${{ secrets.DOCKER_PASSWORD }}
     - name: Push the Docker image
       run: docker push sigbilly/github-action-pull-request-size:latest
+  update_docker_hub_doc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Update Docker hub documentation
+      container:
+        image: docker://mpepping/docker-hub-metadata-github-action
+        env:
+          IMAGE: sigbilly/github-action-pull-request-size
+          DOCKER_USERNAME: sigbilly
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

@@ -1,0 +1,11 @@
+name: LabelPRSize
+
+on: [pull_request]
+
+jobs:
+  label-pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker://sigbilly/github-action-pull-request-size:latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -25,7 +25,6 @@ jobs:
     - uses: docker://sigbilly/github-action-pull-request-size:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-}
 ```
 
 ## Acknowledgments

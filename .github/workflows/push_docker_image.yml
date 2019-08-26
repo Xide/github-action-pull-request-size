@@ -1,0 +1,17 @@
+name: PushDockerImage
+
+on: [push]
+
+jobs:
+  docker_image:
+    branches:
+    - master
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag sigbilly/github-action-pull-request-size:latest
+    - name: Login to Docker hub
+      run: docker login -u sigbilly -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Push the Docker image
+      run: docker push sigbilly/github-action-pull-request-size:latest
